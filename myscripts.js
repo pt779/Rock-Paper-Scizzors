@@ -4,7 +4,19 @@ function getComputerChoice () {
     return choices[(Math.floor(Math.random() * choices.length))];
 }
 
-const playerSelection = choices;
+function getPlayerChoice() {
+    let playerChoice = prompt ("rock, paper or scizzors?")
+    playerChoice = playerChoice.toLowerCase()
+    
+    if (playerChoice === "rock" || playerChoice === "paper" || playerChoice === "scizzors") {
+        return playerChoice;
+    } else {
+        alert ("You didn't type in your choice correctly, try reading a dictionary") 
+    }
+    
+}
+
+const playerSelection = getPlayerChoice ();
 const computerSelection = getComputerChoice ();
 
 function playRound (playerSelection, computerSelection) {
@@ -16,11 +28,14 @@ function playRound (playerSelection, computerSelection) {
     || computerSelection === "paper" && playerSelection === "rock"
     || computerSelection === "scizzors" && playerSelection === "paper") {
         return "Ahh shucks, the computer wins this time";
-    } else {
+    } else if (computerSelection === playerSelection) {
         return "It's a draw";
+    } else {
+        return "Game could not be played"
     }
 }
 
-console.log(computerSelection)
-console.log(playRound("rock",computerSelection))
+
+console.log(`The computer chose ${computerSelection}`)
+console.log(playRound(playerSelection,computerSelection))
  
