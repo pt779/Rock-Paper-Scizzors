@@ -10,6 +10,8 @@ function getPlayerChoice () {
         return playerChoice
 }
 
+let escapeGame = 0;
+let draw = 0;
 let humanScore = 0;
 let computerScore = 0;
 let winner = 0;
@@ -17,6 +19,7 @@ let winner = 0;
 function singleRound (playerSelection, computerSelection) {
     if (playerSelection === ""
     || playerSelection === null) {
+        escapeGame += 1
         alert ("I hope you play again another time");
         return "Game could not be played";
     } else if (computerSelection === "rock" && playerSelection.toLowerCase () === "paper" 
@@ -32,8 +35,9 @@ Woohoo, you win!`;
         computerScore += 1
         return `You chose ${playerSelection.toLowerCase()}
 The computer chose ${computerSelection}
-Ahh shucks, the computer wins this time`;
+Ahh shucks, the computer wins this round`;
     } else if (computerSelection === playerSelection.toLowerCase ()) {
+        draw += 1
         return `You chose ${playerSelection.toLowerCase()}
 The computer chose ${computerSelection}
 It's a draw`;
@@ -44,19 +48,38 @@ It's a draw`;
 }
 
 function keepScore () {
-    let humanScoreText = `Your score is currently ${humanScore}`
-    let computerScoreText = `The computer's score is currently ${computerScore}`
-    console.log(humanScoreText)
-    console.log (computerScoreText)
+    let humanScoreText = `Your score is currently ${humanScore}`;
+    let computerScoreText = `The computer's score is currently ${computerScore}`;
+    console.log(humanScoreText);
+    console.log (computerScoreText);
+}
+
+function gameWinner () {
+    
+    if (humanScore === 5) {
+        alert ("You're the winner!!");
+        return console.log ("Game over")
+    } else if (computerScore === 5) {
+        alert ("The computer is the winner, better luck next time");
+        return console.log ("Game over")
+    } else if (draw === 10) {
+        alert ("It's a draw... how anticlimatic :/");
+        return console.log ("Game over")
+    }
 }
 
 function game () {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 20; i++) {
         let playerSelection = getPlayerChoice ();
         let computerSelection = getComputerChoice ();
         let playRound = singleRound (playerSelection, computerSelection)
-        console.log(playRound)
-        keepScore ()
+        console.log(playRound);
+        keepScore ();
+        gameWinner ();
+        if (escapeGame === 1 || humanScore === 5 || computerScore === 5 || draw === 10) {
+            break;
+        }
+        
     }
 }
 
