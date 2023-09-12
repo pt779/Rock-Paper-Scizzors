@@ -9,14 +9,11 @@ function getPlayerChoice () {
     
         return playerChoice
 }
- 
-const playerSelection = getPlayerChoice ();
-const computerSelection = getComputerChoice ();
-let winner = 0;
-let humanScore = 0;
-let computerScore = 0;
 
-function playRound (playerSelection, computerSelection) {
+
+let winner = 0;
+
+function singleRound (playerSelection, computerSelection) {
     if (playerSelection === ""
     || playerSelection === null) {
         alert ("I hope you play again another time");
@@ -24,17 +21,18 @@ function playRound (playerSelection, computerSelection) {
     } else if (computerSelection === "rock" && playerSelection.toLowerCase () === "paper" 
     || computerSelection === "paper" && playerSelection.toLowerCase () === "scizzors"
     || computerSelection === "scizzors" && playerSelection.toLowerCase () === "rock") {
-        humanScore += 1
-        return `The computer chose ${computerSelection};
+        return `You chose ${playerSelection.toLowerCase()}
+The computer chose ${computerSelection}
 Woohoo, you win!`;
     } else if (computerSelection === "rock" && playerSelection.toLowerCase () === "scizzors" 
     || computerSelection === "paper" && playerSelection.toLowerCase () === "rock"
     || computerSelection === "scizzors" && playerSelection.toLowerCase () === "paper") {
-        computerScore += 1
-        return `The computer chose ${computerSelection};
+        return `You chose ${playerSelection.toLowerCase()}
+The computer chose ${computerSelection}
 Ahh shucks, the computer wins this time`;
     } else if (computerSelection === playerSelection.toLowerCase ()) {
-        return `The computer chose ${computerSelection};
+        return `You chose ${playerSelection.toLowerCase()}
+The computer chose ${computerSelection}
 It's a draw`;
     } else {
         alert ("Check your spelling fam")
@@ -42,11 +40,13 @@ It's a draw`;
     }
 }
 
-
 function game () {
-    for (let playRound = 0; playRound < 5; playRound++) {
-        console.log("test")
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = getPlayerChoice ();
+        let computerSelection = getComputerChoice ();
+        let playRound = singleRound (playerSelection, computerSelection)
+        console.log(playRound)
     }
 }
 
-console.log (playRound(playerSelection, computerSelection))
+game ()
