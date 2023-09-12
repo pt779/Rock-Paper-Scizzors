@@ -10,7 +10,8 @@ function getPlayerChoice () {
         return playerChoice
 }
 
-
+let humanScore = 0;
+let computerScore = 0;
 let winner = 0;
 
 function singleRound (playerSelection, computerSelection) {
@@ -21,12 +22,14 @@ function singleRound (playerSelection, computerSelection) {
     } else if (computerSelection === "rock" && playerSelection.toLowerCase () === "paper" 
     || computerSelection === "paper" && playerSelection.toLowerCase () === "scizzors"
     || computerSelection === "scizzors" && playerSelection.toLowerCase () === "rock") {
+        humanScore += 1
         return `You chose ${playerSelection.toLowerCase()}
 The computer chose ${computerSelection}
 Woohoo, you win!`;
     } else if (computerSelection === "rock" && playerSelection.toLowerCase () === "scizzors" 
     || computerSelection === "paper" && playerSelection.toLowerCase () === "rock"
     || computerSelection === "scizzors" && playerSelection.toLowerCase () === "paper") {
+        computerScore += 1
         return `You chose ${playerSelection.toLowerCase()}
 The computer chose ${computerSelection}
 Ahh shucks, the computer wins this time`;
@@ -40,12 +43,20 @@ It's a draw`;
     }
 }
 
+function keepScore () {
+    let humanScoreText = `Your score is currently ${humanScore}`
+    let computerScoreText = `The computer's score is currently ${computerScore}`
+    console.log(humanScoreText)
+    console.log (computerScoreText)
+}
+
 function game () {
     for (let i = 0; i < 5; i++) {
         let playerSelection = getPlayerChoice ();
         let computerSelection = getComputerChoice ();
         let playRound = singleRound (playerSelection, computerSelection)
         console.log(playRound)
+        keepScore ()
     }
 }
 
